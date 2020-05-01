@@ -40,7 +40,7 @@ class myCmdLine(cmd.Cmd):
     prompt = 'mkstool> '
     def do_help(self, line):
         print ("""
-        Welcome to Makerspace ssh configuration tool
+        Welcome to Makerspace ssh configuration tool(beta version)
 
         commands:
         

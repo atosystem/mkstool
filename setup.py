@@ -19,11 +19,7 @@ setup(
         # Restriction that urllib3's version is less than 1.25 needed to avoid
         # requests dependency problem.
         'urllib3 >= 1.21.1, < 1.25',
-        'certifi',
-        'python-dateutil',
         'requests',
-        'tqdm',
-        'python-slugify',
         'Click'
     ],
     packages=find_packages(),
