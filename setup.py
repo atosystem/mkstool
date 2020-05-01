@@ -1,17 +1,19 @@
+import pathlib
 from setuptools import setup, find_packages
+
+HERE = pathlib.Path(__file__).parent
+README = (HERE / "README.md").read_text()
 
 setup(
     name='mkstool',
     version='1.0.0',
     description='mkstool API',
-    long_description=
-    ('Official API for https://www.kaggle.com, accessible using a command line '
-     'tool implemented in Python. Beta release - Kaggle reserves the right to '
-     'modify the API functionality currently offered.'),
-    author='Kaggle',
-    author_email='support@kaggle.com',
-    url='https://github.com/Kaggle/kaggle-api',
-    keywords=['Kaggle', 'API'],
+    long_description=README,
+    long_description_content_type="text/markdown",
+    author='atosystem',
+    author_email='atosystem@hotmail.com',
+    url='https://github.com/atosystem/mkstool',
+    keywords=['makerspace', 'API'],
     entry_points={'console_scripts': 
         ['mkstool = mkstool.__main__:main']
     },
@@ -23,4 +25,4 @@ setup(
         'Click'
     ],
     packages=find_packages(),
-    license='Apache 2.0')
+    license="MIT")
