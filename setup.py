@@ -23,7 +23,8 @@ setup(
         'python-dateutil',
         'requests',
         'tqdm',
-        'python-slugify'
+        'python-slugify',
+        'Click'
     ],
     packages=find_packages(),
     license='Apache 2.0')

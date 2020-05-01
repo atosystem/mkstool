@@ -10,7 +10,7 @@ import sys
 
 
 
-class MksTool_API():
+class mkstool_api():
     
     def __init__(self):
         self.BASE_URL = 'http://140.112.174.221:8080'
@@ -32,11 +32,10 @@ class MksTool_API():
 
         req_login = self.session.post(self.BASE_URL+API_AUTH,data=self.login_data,allow_redirects = True)
         ret = json.loads(req_login.text)
-        # print(ret)
+        print(ret)
         if(ret['login']):
             self.IsLoginIn = True
             print(ret['message'])
-            self.login_data['user'] = ret['student_id']
             return True
         else:
             print(ret['message'])
@@ -63,59 +62,22 @@ class MksTool_API():
             return
         API_AUTH = '/api/ssh/profile'
         req = self.session.post(self.BASE_URL+API_AUTH,allow_redirects = True)
-        # print(req.text)
-        return json.loads(req.text)
-
-    def ssh_create(self):
-        print("Create ssh account")
-        
-        print("Creating...")
-        API_AUTH = '/api/ssh/add'
-
-        req = self.session.post(self.BASE_URL+API_AUTH,data={'pass' : self.login_data['user']},allow_redirects = True)
-        req = json.loads(req.text)
-        if(req['status']=="success"):
-            print(req['message'])
-            # print("Account created")
-            # print("Username:",self.login_data['user'])
-            # print("Password:(default same with username)")
-            # print("login: $ssh " + self.login_data['user'] + "@140.112.174.221")
-        else:
-            print("Fail")
-            print(req['message'])
-        return
-
-    def ssh_rst_pass(self):
-        print("Create ssh account")
-        
-        print("Reseting...")
-        API_AUTH = '/api/ssh/reset_password'
-
-        req = self.session.post(self.BASE_URL+API_AUTH,data={'pass' : self.login_data['user']},allow_redirects = True)
-        req = json.loads(req.text)
-        if(req['status']=="success"):
-            print(req['message'])
-            # print("Account created")
-            # print("Username:",self.login_data['user'])
-            # print("Password:(default same with username)")
-            # print("login: $ssh " + self.login_data['user'] + "@140.112.174.221")
-        else:
-            print("Fail")
-            print(req['message'])
-        return
+        # req = json.loads(req)
+        print(req.text)
 
 
-# u=input('Username: ')
-# p=getpass.getpass('Password: ')
 
-# n = mkstool_api()
-# result = n.login(u,p)
-# n.ssh_profile_view()
-# exit()
-# # print()
-# if(result):
-#     print('登入成功')
-#     print(n.user + n.userID)
-# else:
-#     print('登入錯誤')
+u=input('Username: ')
+p=getpass.getpass('Password: ')
+
+n = mkstool_api()
+result = n.login(u,p)
+n.ssh_profile_view()
+exit()
+# print()
+if(result):
+    print('登入成功')
+    print(n.user + n.userID)
+else:
+    print('登入錯誤')
 
