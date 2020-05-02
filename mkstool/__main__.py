@@ -47,7 +47,14 @@ class myCmdLine(cmd.Cmd):
         login 
         profile : show your ssh account status
         ssh_create : create a ssh account
-        exit 
+        exit
+
+        ============admin only=================
+        ls users : list all users
+        change_role <row_id> <new role>: change user role by row id
+
+        roles: admin,mks_member,student
+         
         """)
 
     def do_exit(self, line):
@@ -80,6 +87,18 @@ class myCmdLine(cmd.Cmd):
         pass
     def do_ssh_create(self,line):
         mkstool_api.ssh_create()
+    def do_ls(self,line):
+        if(line == "users"):
+            mkstool_api.ssh_users_list()
+        else:
+            print("type ls users")
+    def do_change_role(self,line):
+        z = line.split()
+        if(len(z)!=2):
+            print("arguments count must be 2")
+        else:
+            mkstool_api.ssh_users_change_role(z[0],z[1])
+        
        
         
     do_EOF = do_exit

@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='mkstool',
-    version='1.0.0',
+    version='1.0.3',
     description='mkstool API',
     long_description=README,
     long_description_content_type="text/markdown",
@@ -22,7 +22,8 @@ setup(
         # requests dependency problem.
         'urllib3 >= 1.21.1, < 1.25',
         'requests',
-        'Click'
+        'Click',
+        'tabulate'
     ],
     packages=find_packages(),
     license="MIT")

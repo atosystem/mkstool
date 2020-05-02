@@ -8,7 +8,7 @@ import random
 import getpass
 import sys
 
-
+from tabulate import tabulate
 
 class MksTool_API():
     
@@ -16,16 +16,17 @@ class MksTool_API():
         self.BASE_URL = 'http://140.112.174.221:8080'
         self.login_data = {'user' : '', 'pass' : ''}
         self.IsLoginIn = False
-
-    def login(self,username,password):
-
-        # BASE_URL = 'http://140.112.174.221:8080'
-        API_AUTH = '/api/checkauth'
-        LOGIN_URL = 'https://web2.cc.ntu.edu.tw/p/s/login2/p1.php'
         USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
 
         self.session = requests.Session()
         self.session.headers = {'user-agent' : USER_AGENT}
+    
+    def login(self,username,password):
+
+        # BASE_URL = 'http://140.112.174.221:8080'
+        API_AUTH = '/api/checkauth'
+        # LOGIN_URL = 'https://web2.cc.ntu.edu.tw/p/s/login2/p1.php'
+        
         # req = session.get(FIRST_URL)
 
         self.login_data = {'user' : username, 'pass' : password}
@@ -104,6 +105,41 @@ class MksTool_API():
             print(req['message'])
         return
 
+    def ssh_users_list(self):
+        API_AUTH = '/api/ssh/users'
+        req = self.session.post(self.BASE_URL+API_AUTH,allow_redirects = True)
+        req = json.loads(req.text)
+        if(req['status']=="success"):
+            print(tabulate(req['data'], headers=['id', 'student_id','role','ssh','name','created']))
+            # for u in req['data']:
+            #     print(u)
+            # print(req['data'])
+            # print("Account created")
+            # print("Username:",self.login_data['user'])
+            # print("Password:(default same with username)")
+            # print("login: $ssh " + self.login_data['user'] + "@140.112.174.221")
+        else:
+            print("Fail")
+            print(req['message'])
+
+    def ssh_users_change_role(self,r_id,n_role):
+        API_AUTH = '/api/ssh/change_role'
+
+        req = self.session.post(self.BASE_URL+API_AUTH,data={'new_role' : n_role,'row_id':r_id},allow_redirects = True)
+        req = json.loads(req.text)
+
+        if(req['status']=="success"):
+            print(req['message'])
+            # for u in req['data']:
+            #     print(u)
+            # print(req['data'])
+            # print("Account created")
+            # print("Username:",self.login_data['user'])
+            # print("Password:(default same with username)")
+            # print("login: $ssh " + self.login_data['user'] + "@140.112.174.221")
+        else:
+            print("Fail")
+            print(req['message'])
 
 # u=input('Username: ')
 # p=getpass.getpass('Password: ')
