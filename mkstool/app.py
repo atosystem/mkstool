@@ -13,7 +13,7 @@ import sys
 class mkstool_api():
     
     def __init__(self):
-        self.BASE_URL = 'http://140.112.174.221:8080'
+        self.BASE_URL = 'http://140.112.174.222:8080'
         self.login_data = {'user' : '', 'pass' : ''}
         self.IsLoginIn = False
 

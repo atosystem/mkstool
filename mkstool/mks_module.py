@@ -13,7 +13,7 @@ from tabulate import tabulate
 class MksTool_API():
     
     def __init__(self):
-        self.BASE_URL = 'http://140.112.174.221:8080'
+        self.BASE_URL = 'http://140.112.174.222:8080'
         self.login_data = {'user' : '', 'pass' : ''}
         self.IsLoginIn = False
         USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
@@ -59,9 +59,9 @@ class MksTool_API():
         #     return False
 
     def ssh_profile_view(self):
-        if(not self.IsLoginIn):
-            print("not login yet")
-            return
+        # if(not self.IsLoginIn):
+        #     print("not login yet")
+        #     return
         API_AUTH = '/api/ssh/profile'
         req = self.session.post(self.BASE_URL+API_AUTH,allow_redirects = True)
         # print(req.text)
