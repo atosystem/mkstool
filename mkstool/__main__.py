@@ -10,31 +10,6 @@ import getpass
 
 mkstool_api = MksTool_API()
 
-def maina():
-    # print('in main')
-    # args = sys.argv[1:]
-    # print('count of args :: {}'.format(len(args)))
-    # for arg in args:
-    #     print('passed argument :: {}'.format(arg))
-    # my_function('hello world')
-    # my_object = MyClass('Thomas')
-    # my_object.say_name()
-
-    # mkstool_api = MksTool_API()
-    # print("MakerSpace Service Tool v1.0")
-    # u=input('Username: ')
-    # p=getpass.getpass('Password: ')
-    # if(not mkstool_api.login(u,p)):
-    return
-    #     return
-
-# @click.command()
-# @click.option('-t', '--to', 'to', help='To who')
-# def main(to):
-#     '''Say hello to someone'''
-#     print(f'Hello, {to or "stranger"}!')
-    
-
 class myCmdLine(cmd.Cmd):
     """Simple command processor example."""
     prompt = 'mkstool> '
@@ -44,10 +19,12 @@ class myCmdLine(cmd.Cmd):
 
         commands:
         
-        login 
-        profile : show your ssh account status
-        ssh_create : create a ssh account
-        exit
+        login : login to the system (using ntu cc account)
+        profile : show your ssh account status 
+        ssh_create : create a ssh account (only for ntueesaad members)
+        change_displayname : change your display name on MKS fingerprint system
+        help : show all commands
+        exit : exit the program
 
         ============admin only=================
         ls users : list all users
@@ -70,9 +47,9 @@ class myCmdLine(cmd.Cmd):
     def help_login(self,line):
         pass
 
-    def do_status(self,line):
+    # def do_status(self,line):
 
-        pass
+    #     pass
     
     def do_profile(self,line):
         ret = mkstool_api.ssh_profile_view()
@@ -91,15 +68,16 @@ class myCmdLine(cmd.Cmd):
         if(line == "users"):
             mkstool_api.ssh_users_list()
         else:
-            print("type ls users")
+            print("Please type 'ls users'")
     def do_change_role(self,line):
         z = line.split()
         if(len(z)!=2):
             print("arguments count must be 2")
         else:
             mkstool_api.ssh_users_change_role(z[0],z[1])
-        
-       
+    
+    def do_change_displayname(self,line):
+        mkstool_api.door_change_display_name()
         
     do_EOF = do_exit
 

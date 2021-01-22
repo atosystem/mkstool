@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='mkstool',
-    version='1.0.3',
+    version='1.0.7',
     description='mkstool API',
     long_description=README,
     long_description_content_type="text/markdown",

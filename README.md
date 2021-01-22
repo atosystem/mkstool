@@ -5,9 +5,11 @@ pip install mkstool
 ```
 * commands
 ```
-login : login to the system
-profile : show your ssh account status (exlude role student)
-ssh_create : create a ssh account (exlude role student)
+login : login to the system (using ntu cc account)
+profile : show your ssh account status 
+ssh_create : create a ssh account (only for ntueesaad members)
+change_displayname : change your display name on MKS fingerprint system
+help : show all commands
 exit : exit the program
 
 ================admin only======================

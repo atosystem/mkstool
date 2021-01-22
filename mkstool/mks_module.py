@@ -110,7 +110,7 @@ class MksTool_API():
         req = self.session.post(self.BASE_URL+API_AUTH,allow_redirects = True)
         req = json.loads(req.text)
         if(req['status']=="success"):
-            print(tabulate(req['data'], headers=['id', 'student_id','role','ssh','name','created']))
+            print(tabulate(req['data'], headers=['id', 'student_id','role','ssh','name','display_name','fingerprint_id','created']))
             # for u in req['data']:
             #     print(u)
             # print(req['data'])
@@ -140,6 +140,27 @@ class MksTool_API():
         else:
             print("Fail")
             print(req['message'])
+
+    def door_change_display_name(self):
+        new_disp_name = input("Please enter your new display name: ")
+        new_disp_name = new_disp_name.strip(" ")
+        print("Upadting...")
+        API_AUTH = '/api/door/change_displayname'
+
+        req = self.session.post(self.BASE_URL+API_AUTH,data={'new_display_name' : new_disp_name},allow_redirects = True)
+        req = json.loads(req.text)
+        if(req['status']=="success"):
+            print(req['message'])
+            # print("Account created")
+            # print("Username:",self.login_data['user'])
+            # print("Password:(default same with username)")
+            # print("login: $ssh " + self.login_data['user'] + "@140.112.174.221")
+        else:
+            print("Fail")
+            print(req['message'])
+        return
+
+
 
 # u=input('Username: ')
 # p=getpass.getpass('Password: ')
